@@ -24,7 +24,7 @@ public class Generate {
    * @param txt une chaîne de caractère à hâcher
    * @param algorithm l'algorithme à utiliser (ex: "SHA-256")
    * 
-   * @return la chaîne hâchée encodée en hexadécimal
+   * @return la chaîne hâchée et encodée en hexadécimal
    */
   public static String hash(String txt, String algorithm) {
     String hash = "";
@@ -54,7 +54,8 @@ public class Generate {
   }
 
   /**
-   * Génére une suite d'octets aléatoires encodés au final en hexadécimal.
+   * Génére une suite d'octets aléatoires encodés au final en hexadécimal.<br>
+   * <br>
    * A noter que la taille finale de la chaîne retournée sera 2x la taille
    * du nombre d'octets demandé. Exemple: si 16 octets sont demandés,
    * la taille finale sera de 32 caractères, car chaque octet sera codé de
@@ -71,10 +72,12 @@ public class Generate {
   }
 
   /**
-   * Génére une suite d'octets aléatoires encodés au final en Base64.
+   * Génére une suite d'octets aléatoires encodés au final en Base64.<br>
+   * 
    * Base64 utilisant 4 caractères imprimables pour 3 octets binaires, 
-   * il faut noter que la taille finale de la chaîne retournée sera 4/3 *
-   * la taille demandé (arrondie pour pouvoir être divisible par 3). 
+   * il faut noter que la taille finale de la chaîne retournée sera 4/3 
+   * x la taille demandée (encore arrondie pour pouvoir être divisible par 3).<br>
+   * <br>
    * Exemple: si 16 octets sont demandés, c'est 18 / 3 * 4 = 24 car.
    * 
    * @param size le nombre d'octets à générer
