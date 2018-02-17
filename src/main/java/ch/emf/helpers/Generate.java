@@ -73,7 +73,7 @@ public class Generate {
 
   /**
    * Génére une suite d'octets aléatoires encodés au final en Base64.<br>
-   * 
+   * <br>
    * Base64 utilisant 4 caractères imprimables pour 3 octets binaires, 
    * il faut noter que la taille finale de la chaîne retournée sera 4/3 
    * x la taille demandée (encore arrondie pour pouvoir être divisible par 3).<br>
