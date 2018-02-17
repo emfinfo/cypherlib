@@ -48,7 +48,7 @@ public class Generate {
     Locale locale = Locale.getDefault();
     SimpleDateFormat ldf = new SimpleDateFormat("yyyy-MM-dd", locale);
     String sDate = ldf.format(date);
-    return Convert.toHex(("qWe" + sDate + "PoI").getBytes());
+    return Convert.toBase64(("qWe" + sDate + "PoI").getBytes());
   }
 
   /**
