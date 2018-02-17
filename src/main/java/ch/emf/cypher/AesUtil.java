@@ -23,7 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
  * Utilise la méthode AES/CBC/PKCS5Padding qui nécessite un sel pour
  * ne pas avoir 2x la même clé pour un même mot de passe, mais
  * également un vecteur d'initialisation (nommé "iv" ou "four") 
- * pour démarrer l'encryptage toujours différement.
+ * pour démarrer l'encryptage toujours différement.<br>
  * <br>
  * Selon sources et explications ici :<br>
  * See https://www.linkedin.com/pulse/jshtml5-java-encryption-using-aes-128bit256bit-subhadip-pal/
