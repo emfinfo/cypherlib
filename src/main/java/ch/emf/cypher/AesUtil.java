@@ -63,6 +63,7 @@ public class AesUtil {
    * @param key la clé finale généré
    * @param iv le vecteur d'inialisation à utiliser
    * @param bytes le tableau d'octets à crypter ou décrypter
+   * 
    * @return le tableau d'octets cryptés ou décryptés
    */
   private byte[] doFinal(int encryptMode, SecretKey key, String iv, byte[] bytes) {
@@ -82,7 +83,8 @@ public class AesUtil {
    * 
    * @param salt un sel (généralement créé aléatoirement, voir la classe Generate)
    * @param passphrase une phrase faisant office de mot de passe
-   * @return
+   * 
+   * @return la clé AES générée
    */
   private SecretKey generateKey(String salt, String passphrase) {
     try {
@@ -103,6 +105,7 @@ public class AesUtil {
    * @param iv         un vecteur d'initialisation (généralement aléatoire, voir la classe Generate)
    * @param passphrase une phrase faisant office de mot de passe
    * @param plaintext  le texte à encrypter
+   * 
    * @return le texte encrypté et encodé en Base64
    */
   public String encrypt(String salt, String iv, String passphrase, String plaintext) {
@@ -122,6 +125,7 @@ public class AesUtil {
    * @param iv         un vecteur d'initialisation (généralement transmis aussi)
    * @param passphrase une phrase faisant office de mot de passe
    * @param ciphertext le texte encrypté et encodé Base64 qu'il faut décrypter
+   * 
    * @return le texte décrypté, donc en clair (UTF-8)
    */
   public String decrypt(String salt, String iv, String passphrase, String ciphertext) {
