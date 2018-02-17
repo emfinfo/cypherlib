@@ -119,7 +119,7 @@ public class AesUtil {
   }
 
   /**
-   * Déchiffre un texte encrypté et codé Base64.
+   * Décrypte un texte encrypté et codé Base64.
    *
    * @param salt       un sel (généralement transmis au serveur dans une application web)
    * @param iv         un vecteur d'initialisation (généralement transmis aussi)
