@@ -29,7 +29,14 @@ public class Convert {
   }
 
   /**
-   * Convertit un tableau d'octets en une chaîne de caractères Base64.
+   * Convertit un tableau d'octets en une chaîne de caractères Base64.<br>
+   * <br>
+   * Base64 utilisant 4 caractères imprimables pour 3 octets binaires, 
+   * il faut noter que la taille finale de la chaîne retournée sera 4/3
+   * x la taille du tableau d'octets (encore arrondie pour pouvoir être 
+   * divisible par 3).<br>
+   * <br>
+   * Exemple: si 16 octets dans le tableau, c'est 18 / 3 * 4 = 24 car.
    * 
    * @param bytes un tableau d'octets
    * @return la chaîne de caractères correspondante Base64 
@@ -49,7 +56,13 @@ public class Convert {
   }
 
   /**
-   * Convertit un tableau d'octets en une chaîne de caractères hexadécimale.
+   * Convertit un tableau d'octets en une chaîne de caractères hexadécimale.<br>
+   * <br>
+   * A noter que la taille finale de la chaîne retournée sera 2x la taille
+   * du tableau d'octets fourni.<br>
+   * <br>
+   * Exemple: si le tableau contient 16 octets, la taille finale sera de 32 caractères, 
+   * car chaque octet sera codé de 00 à ff.
    * 
    * @param bytes un tableau d'octets
    * @return la chaîne de caractères correspondante en hexadécimal 
