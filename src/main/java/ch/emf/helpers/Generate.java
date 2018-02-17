@@ -19,7 +19,7 @@ import org.apache.commons.codec.binary.Hex;
 public class Generate {
  
   /**
-   * Permet de hâcher une chaîne de caractères avec un algorithme spécifié.
+   * Génère une empreinte (hash, digest) pour une chaîne de caractères et un algorithme fournis.
    *
    * @param txt une chaîne de caractère à hâcher
    * @param algorithm l'algorithme à utiliser (ex: "SHA-256")
