@@ -44,13 +44,11 @@ public class Generate {
    * @return la phrase pouvant faire office de mot de passe
    */
   public static String passPhrase() {
-    String KA = "qWe";
-    String KB = "PoI";
     Date date = new Date();
     Locale locale = Locale.getDefault();
     SimpleDateFormat ldf = new SimpleDateFormat("yyyy-MM-dd", locale);
     String sDate = ldf.format(date);
-    return KA + sDate + KB;
+    return Convert.toBase64(("qWe" + sDate + "PoI").getBytes());
   }
 
   /**
