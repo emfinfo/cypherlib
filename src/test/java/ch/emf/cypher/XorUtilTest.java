@@ -17,8 +17,7 @@ import org.junit.runners.MethodSorters;
 public class XorUtilTest {
   private static String TXT = "06h30, Bonjour les amis de la pêche en Gruyère !";
   private static String KEY = "Pablo" + "Picasso";
-//  private static String KEY = "Steve" + "Jobs";
-
+  
   private static String original[] = {"Demo AG", "Demo Ltd", "Demo SA"};
   private static String encoded[] = {"", "", ""};
 

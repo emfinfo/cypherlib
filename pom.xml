@@ -5,7 +5,7 @@
   <!-- the basics -->
   <groupId>ch.emf.info</groupId>
   <artifactId>cypherlib</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +23,7 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.19</version>
     </dependency>
-    
+
     <!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.codec -->
     <dependency>
       <groupId>org.apache.directory.studio</groupId>
