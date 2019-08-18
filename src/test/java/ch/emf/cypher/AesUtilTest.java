@@ -1,7 +1,7 @@
 package ch.emf.cypher;
 
-import ch.emf.helpers.Generate;
-import ch.emf.helpers.SecretKey;
+import ch.emf.cypher.helpers.Generate;
+import ch.emf.cypher.helpers.SecretKey;
 import ch.emf.helpers.StackTracer;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;

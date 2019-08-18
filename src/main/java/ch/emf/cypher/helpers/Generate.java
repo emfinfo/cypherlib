@@ -1,4 +1,4 @@
-package ch.emf.helpers;
+package ch.emf.cypher.helpers;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
