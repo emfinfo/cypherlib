@@ -1,6 +1,6 @@
 package ch.emf.cypher;
 
-import ch.emf.helpers.Convert;
+import ch.emf.cypher.helpers.Convert;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;

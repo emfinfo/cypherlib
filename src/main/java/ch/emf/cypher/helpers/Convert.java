@@ -1,4 +1,4 @@
-package ch.emf.helpers;
+package ch.emf.cypher.helpers;
 
 import ch.emf.cypher.AlphaSubstUtil;
 import ch.emf.cypher.XorUtil;
