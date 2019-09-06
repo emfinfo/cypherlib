@@ -24,4 +24,4 @@ New in release 1.0.2 (25.8.2018) :
 
 New in release 1.0.1 (17.2.2018) :
 * First commit on GitHub
-
+ 
