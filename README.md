@@ -14,7 +14,7 @@ You can check a specific test with (for example) :
 - mvn test -Dtest=AesUtilTest
 
 Documentation :<br>
-    http://jcstritt.emf-informatique.ch/doc/cypherlib<br>
+    http://homepage.hispeed.ch/~jcsinfo/doc/cypherlib<br>
 
 New in release 1.1.0 (14.8.2019) :
 * New class helpers.Utils for decrypting login data
