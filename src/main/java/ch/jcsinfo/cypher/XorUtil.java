@@ -1,4 +1,4 @@
-package ch.emf.cypher;
+package ch.jcsinfo.cypher;
 
 import java.nio.charset.Charset;
 import java.util.Base64;

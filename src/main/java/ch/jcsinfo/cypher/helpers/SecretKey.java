@@ -1,4 +1,4 @@
-package ch.emf.cypher.helpers;
+package ch.jcsinfo.cypher.helpers;
 
 
 import java.io.File;

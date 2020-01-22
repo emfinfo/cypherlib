@@ -1,6 +1,6 @@
-package ch.emf.cypher;
+package ch.jcsinfo.cypher;
 
-import ch.emf.cypher.helpers.Convert;
+import ch.jcsinfo.cypher.helpers.Convert;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -30,7 +30,7 @@ import javax.crypto.spec.SecretKeySpec;
  *
  * @author Subhadip Pal / J.-C. Stritt
  */
-public class AesUtil {
+public class AES {
 
   private final int keySize;
   private final int iterationCount;
@@ -46,11 +46,11 @@ public class AesUtil {
    * @param keySize        la taille de la clé (128 ou 256)
    * @param iterationCount le nb d'itérations permettant de changer les spécificités de la clé
    */
-  public AesUtil(int keySize, int iterationCount) {
+  public AES(int keySize, int iterationCount) {
     this.keySize = keySize;
     this.iterationCount = iterationCount;
     try {
-      cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+      this.cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
     } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
       throw fail(e);
     }
@@ -68,7 +68,7 @@ public class AesUtil {
    */
   private byte[] doFinal(int encryptMode, SecretKey key, String iv, byte[] bytes) {
     try {
-      cipher.init(encryptMode, key, new IvParameterSpec(Convert.toHex(iv)));
+      cipher.init(encryptMode, key, new IvParameterSpec(Convert.hexToBytes(iv)));
       return cipher.doFinal(bytes);
     } catch (InvalidKeyException
       | InvalidAlgorithmParameterException
@@ -90,7 +90,10 @@ public class AesUtil {
     try {
       SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 //      SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-      KeySpec spec = new PBEKeySpec(passphrase.toCharArray(), Convert.toHex(salt), iterationCount, keySize);
+
+      char[] charArray = passphrase.toCharArray();
+      byte[] byteArray = Convert.hexToBytes(salt);
+      KeySpec spec = new PBEKeySpec(charArray, byteArray, iterationCount, keySize);
       SecretKey key = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
       return key;
     } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {

@@ -1,6 +1,6 @@
-package ch.emf.cypher;
+package ch.jcsinfo.cypher;
 
-import ch.emf.helpers.StackTracer;
+import ch.jcsinfo.helpers.StackTracer;
 import static org.junit.Assert.*;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

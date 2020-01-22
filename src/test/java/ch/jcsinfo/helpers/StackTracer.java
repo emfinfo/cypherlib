@@ -1,4 +1,4 @@
-package ch.emf.helpers;
+package ch.jcsinfo.helpers;
 
 /**
  * Permet de récupérer des informations telles que la classe ou la méthode courante (très
@@ -58,5 +58,10 @@ public class StackTracer {
     System.out.println("  - source: " + source);
     System.out.println("  - result: " + result);
   }
+  
+  public static void printSimpleInfo(String label, String info) {
+    System.out.println("  - " + label + ": " + info);
+  }
+  
 
 }

@@ -1,4 +1,4 @@
-package ch.emf.cypher;
+package ch.jcsinfo.cypher;
 
 /**
  * Encryptage - décryptage par la méthode de substitution d'alphabets.<br>

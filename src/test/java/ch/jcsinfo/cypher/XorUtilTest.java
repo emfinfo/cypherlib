@@ -1,6 +1,6 @@
-package ch.emf.cypher;
+package ch.jcsinfo.cypher;
 
-import ch.emf.helpers.StackTracer;
+import ch.jcsinfo.helpers.StackTracer;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import static org.junit.Assert.*;

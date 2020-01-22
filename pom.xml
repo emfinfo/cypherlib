@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- the basics -->
-  <groupId>ch.emf.info</groupId>
+  <groupId>ch.jcsinfo.libs</groupId>
   <artifactId>cypherlib</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <packaging>jar</packaging>
   
   <!-- maven project properties -->
@@ -18,20 +18,6 @@
 
   <!-- dependencies -->
   <dependencies>
-
-    <!-- dependencies for compile (and run) -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.19</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.codec -->
-    <dependency>
-      <groupId>org.apache.directory.studio</groupId>
-      <artifactId>org.apache.commons.codec</artifactId>
-      <version>1.8</version>
-    </dependency>
 
     <!-- dependencies for tests -->
     <dependency>
@@ -46,25 +32,26 @@
   <!-- build settings -->
   <build>
     <plugins>
+            
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.2.1</version>
       </plugin>
 
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.0-M1</version>
+        <version>3.1.1</version>
       </plugin>
 
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.8.2</version>
+        <version>3.0.0-M1</version>
       </plugin>
 
       <plugin>
         <groupId>net.ju-n.maven.plugins</groupId>
         <artifactId>checksum-maven-plugin</artifactId>
-        <version>1.3</version>
+        <version>1.4</version>
         <executions>
           <execution>
             <goals>
@@ -84,32 +71,31 @@
           </fileSets>
         </configuration>
       </plugin>
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <showDeprecation>true</showDeprecation>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
-  <reporting>
-    <plugins>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.8.2</version>
+      </plugin>      
+      
       <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.9</version>
+        <version>3.0.0</version>
         <configuration>
           <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
         </configuration>
-      </plugin>
+      </plugin>      
+      
+    </plugins>
+  </build>
 
+  <!-- create javadoc -->
+  <reporting>
+    <plugins>
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.3</version>
+        <version>3.1.1</version>
       </plugin>
-
     </plugins>
   </reporting>
 
@@ -143,6 +129,5 @@
       </properties>
     </developer>
   </developers>
-
 
 </project>

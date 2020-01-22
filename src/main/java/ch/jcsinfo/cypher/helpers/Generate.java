@@ -1,16 +1,15 @@
-package ch.emf.cypher.helpers;
+package ch.jcsinfo.cypher.helpers;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.Hex;
 
 /**
  * Classe pour générer des empreintes ou des textes en hexadécimal ou Base64.
@@ -45,8 +44,6 @@ public class Generate {
    * @return la phrase pouvant faire office de mot de passe
    */
   public static String passPhrase() {
-//    Date date = new Date();
-
     // récupère la date GMT
     Calendar time = Calendar.getInstance();
     time.add(Calendar.MILLISECOND, -time.getTimeZone().getOffset(time.getTimeInMillis()));
@@ -73,7 +70,7 @@ public class Generate {
     final Random r = new SecureRandom();
     byte[] salt = new byte[size];
     r.nextBytes(salt);
-    return Hex.encodeHexString(salt);
+    return Convert.toHex(salt);
   }
 
   /**
@@ -92,7 +89,7 @@ public class Generate {
     final Random r = new SecureRandom();
     byte[] salt = new byte[size];
     r.nextBytes(salt);
-    return Base64.encodeBase64String(salt);
+    return Base64.getEncoder().encodeToString(salt);
   }
 
 }

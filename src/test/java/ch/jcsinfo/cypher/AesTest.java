@@ -1,8 +1,8 @@
-package ch.emf.cypher;
+package ch.jcsinfo.cypher;
 
-import ch.emf.cypher.helpers.Generate;
-import ch.emf.cypher.helpers.SecretKey;
-import ch.emf.helpers.StackTracer;
+import ch.jcsinfo.cypher.helpers.Generate;
+import ch.jcsinfo.cypher.helpers.SecretKey;
+import ch.jcsinfo.helpers.StackTracer;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -15,7 +15,7 @@ import org.junit.runners.MethodSorters;
  * @author jcstritt
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class AesUtilTest {
+public class AesTest {
   private static String TXT = "06h30, Bonjour les amis de la pêche en Gruyère !";
 //  private static String TXT = "user1/DEMO/Test2014/1518655806465";
 
@@ -24,20 +24,20 @@ public class AesUtilTest {
   private static String salt;
   private static String iv;
 
-  private static AesUtil aesUtil;
+  private static AES aes;
 
   @BeforeClass
   public static void setUpClass() throws Exception {
     salt = Generate.randomHex(16);
     iv = Generate.randomHex(16);
-    aesUtil = new AesUtil(keySize, iterationCount);
+    aes = new AES(keySize, iterationCount);
   }
 
   @Test
   public void test01_encrypt() throws Exception {
     StackTracer.printCurrentTestMethod();
-    String passPhrase = Generate.passPhrase();
-    String encrypted = aesUtil.encrypt(salt, iv, passPhrase, TXT);
+    String passPhrase = Generate.randomBase64(16);
+    String encrypted = aes.encrypt(salt, iv, passPhrase, TXT);
     StackTracer.printTestInfo(passPhrase, TXT + " len=" + TXT.length(), encrypted + " len=" + encrypted.length());
     assertTrue(!encrypted.equals(TXT));
   }
@@ -46,8 +46,8 @@ public class AesUtilTest {
   public void test02_decrypt() throws Exception {
     StackTracer.printCurrentTestMethod();
     String passPhrase = Generate.passPhrase();
-    String encrypted = aesUtil.encrypt(salt, iv, passPhrase, TXT);
-    String decrypted = aesUtil.decrypt(salt, iv, passPhrase, encrypted);
+    String encrypted = aes.encrypt(salt, iv, passPhrase, TXT);
+    String decrypted = aes.decrypt(salt, iv, passPhrase, encrypted);
     StackTracer.printTestInfo(passPhrase, encrypted, decrypted);
     assertTrue(decrypted.equals(TXT));
   }
@@ -56,7 +56,7 @@ public class AesUtilTest {
   public void test03_encrypt() throws Exception {
     StackTracer.printCurrentTestMethod(" - secret key in file secret.key");
     String passPhrase = SecretKey.getInstance().load();
-    String encrypted = aesUtil.encrypt(salt, iv, passPhrase, TXT);
+    String encrypted = aes.encrypt(salt, iv, passPhrase, TXT);
     StackTracer.printTestInfo(passPhrase, TXT, encrypted);
     assertTrue(!encrypted.equals(TXT));
   }
@@ -65,10 +65,30 @@ public class AesUtilTest {
   public void test04_decrypt() throws Exception {
     StackTracer.printCurrentTestMethod(" - secret key in file secret.key");
     String passPhrase = SecretKey.getInstance().load();
-    String encrypted = aesUtil.encrypt(salt, iv, passPhrase, TXT);
-    String decrypted = aesUtil.decrypt(salt, iv, passPhrase, encrypted);
+    String encrypted = aes.encrypt(salt, iv, passPhrase, TXT);
+    String decrypted = aes.decrypt(salt, iv, passPhrase, encrypted);
     StackTracer.printTestInfo(passPhrase, encrypted, decrypted);
     assertTrue(decrypted.equals(TXT));
+  }  
+  
+  @Test
+  public void test05_prod() throws Exception {
+    String customer[] = {"Dupond SA$", "Dupond AG$", "Dupond LTD$"};
+    StackTracer.printCurrentTestMethod(" - special license key");
+//    String passPhrase = SecretKey.getInstance().load();
+    String passPhrase = Generate.passPhrase();    
+    
+    StackTracer.printSimpleInfo("salt", salt);      
+    StackTracer.printSimpleInfo("four", iv);      
+    StackTracer.printSimpleInfo("pass", passPhrase); 
+    aes = new AES(keySize, iterationCount);
+    for (String c : customer) {
+      String encrypted = aes.encrypt(salt, iv, passPhrase, c);
+      String decrypted = aes.decrypt(salt, iv, passPhrase, encrypted);
+      System.out.println(encrypted);
+      System.out.println("    " + decrypted);
+    }
+    System.out.println();
   }  
   
 }
