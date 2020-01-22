@@ -4,7 +4,6 @@ A Java library for encryption/decryption and hashing
 - class AesUtil to check encrypted data
 - class AlphaSubsUtil for encryp/decrypt with alphabets substitution (for education);
 - class XorUtil for encrypt/decrypt with bit manipulation (XOR, for education).
-- class Util for decrypting Login data and check customer license
 
 You can download and open this project in NetBeans. It's a Java 8 maven project. So, dependencies are loaded automaticly from maven central. There are some test classes where you can learn how to use this library.
 
