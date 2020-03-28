@@ -5,7 +5,7 @@
   <!-- the basics -->
   <groupId>ch.jcsinfo.libs</groupId>
   <artifactId>cypherlib</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
   <packaging>jar</packaging>
   
   <!-- maven project properties -->

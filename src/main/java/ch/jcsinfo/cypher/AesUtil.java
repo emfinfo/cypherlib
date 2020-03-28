@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 public class AesUtil {
   private final static String[] PNAME = {"li", "cen", "se", ".pro", "per", "ties"};
   private final static long MILLISECONDS_PER_DAY = 86400000;
+  private final static int[] MAX_DAYS = {30, 15};
   private static Date curTimestamp = new Date(0);
 
   private static int getDaysBetweenTwoDates(Date theLaterDate, Date theEarlierDate) {
@@ -139,86 +140,57 @@ public class AesUtil {
     }
     return result;
   }
-
+  
   /**
-   * Retourne le nom du propriétaire d'une licence. S'il n'est pas trouvé
-   * dans le fichier "licence.properties", un nom par défaut est récupéré
-   * depuis une resource de l'application (avec le nom "app.licence.name").
-   *
-   * @param key la clé de décryptage pour le fichier de licence
-   * @param rb  un objet "ResourceBundle" pour retrouver un nom
-   * @return le nom du propriétaire de la licence ou un nom par défaut
-   */
-  public static String getLicenseOwner(String key, ResourceBundle rb) {
-    String result;
-    String licence;
-    try {
-      licence = getLicense(key);
-    } catch (Exception ex) {
-      licence = "";
-    }
-    if (licence.endsWith("$") || licence.endsWith("*")) {
-      result = licence.substring(0, licence.length() - 1);
-    } else {
-      result = rb.getString("app.licence.name").trim();
-    }
-//    System.out.println("getLicenseOwner: key=" + key + ", licence=" + licence + ", result=" + result);
-    return result;
-  }
-
-  /**
-   * Teste si une licence est valide.
-   *
-   * @param key       la clé de décryptage
+   * Récupère les propriétés d'une licence encryptée AES.
+   * 
+   * @param key la clé de décryptage de la licence
+   * @param rb  un objet "ResourceBundle" pour retrouver le nom par défaut dans les resources
    * @param startTime la date en [ms] où le logiciel a été installée
-   * @return true si la licence est valide, false autrement
+   * 
+   * @return un object Properties avec les 4 propriétés de la licence (valid, owner, maxDays, maxDate)
    */
-  public static boolean isLicenseOk(String key, long startTime) {
-    String licence;
+  public static Properties getLicenseProperties(String key, ResourceBundle rb, long startTime) {
+    Properties pr = new Properties();
+
+    // trouve la licence d'après la clé
+    String license;
     try {
-      licence = getLicense(key);
+      license = getLicense(key);
     } catch (Exception ex) {
-      licence = "";
+      license = "";
     }
-    boolean licenceOk = licence.endsWith("*");
-    int maxDays = (licence.endsWith("$") ? 30 : 15);
+
+    // détermine la validité de la licence
+    boolean valid = license.endsWith("*");
+    int maxDays = (license.endsWith("$") ? MAX_DAYS[0] : MAX_DAYS[1]);
     Date nowDate = new GregorianCalendar().getTime();
     Date startDate = new Date(startTime);
     int days = getDaysBetweenTwoDates(startDate, nowDate);
-    licenceOk = licenceOk || days <= maxDays;
+    pr.put("valid", valid || days <= maxDays);
 
-//    System.out.println(
-//      "Licence ok: " + licenceOk
-//      + ", start date: " + dateToString(startDate) + " (" + startDate.getTime() + ")"
-//      + ", now date: " + dateToString(nowDate) + " (" + nowDate.getTime() + ")"
-//      + ", days=" + days);
-
-    return licenceOk;
-  }
-  
-  /**
-   * Retourne la date de fin de la licence ou le signe ∞ (infini) si
-   * la licence est définitive.
-   * 
-   * @param key       la clé de décryptage
-   * @param startTime la date en [ms] où le logiciel a été installée
-   * @return un string contenant la date de fin (en utilisant la Locale par défaut)
-   */
-  public static String getLicenseEnd(String key, long startTime) {
-    String result = "OO";
-    String licence;
-    try {
-      licence = getLicense(key);
-    } catch (Exception ex) {
-      licence = "";
+    // détermine le nom du propriétaire de la licence
+    String owner;
+    if (license.endsWith("$") || license.endsWith("*")) {
+      owner = license.substring(0, license.length() - 1);
+    } else {
+      owner = rb.getString("app.licence.name").trim();
     }
-    boolean licenceOk = licence.endsWith("*");
-    int maxDays = (licence.endsWith("$") ? 30 : 15);
+    pr.put("owner", owner);
+    
+    // détermine le nombre de jours valides pour la license, 0 = infini
+    pr.put("maxDays", maxDays);
+    
+    // détermine la date de fin de la licence
+    String maxDate = "OO";
     Date endDate = new Date(startTime + maxDays * MILLISECONDS_PER_DAY);
-    if (!licenceOk) {
-      result = dateToString(endDate);
-    }
-    return result;
+    if (!valid) {
+      maxDate = dateToString(endDate);
+    }    
+    pr.put("maxDate", maxDate);
+    
+    // retourne les propriétés de la licence
+    return pr;
   }
 
 }
