@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class AesUtil {
   private final static String[] PNAME = {"li", "cen", "se", ".pro", "per", "ties"};
   private final static long MILLISECONDS_PER_DAY = 86400000;
-  private final static int[] MAX_DAYS = {30, 15};
+  private final static int[] MAX_DAYS = {365, 30};
   private static Date curTimestamp = new Date(0);
 
   private static int getDaysBetweenTwoDates(Date theLaterDate, Date theEarlierDate) {
@@ -36,7 +36,7 @@ public class AesUtil {
     sDate = ldf.format(date);
     return sDate;
   }
-
+  
   /**
    * Extraire les paramètres encryptés AES des données d'un login.
    * Ces paramètres, séparés par un séparateur spécial, sont au minimum 4 :<br>
@@ -148,7 +148,7 @@ public class AesUtil {
    * @param rb  un objet "ResourceBundle" pour retrouver le nom par défaut dans les resources
    * @param startTime la date en [ms] où le logiciel a été installée
    * 
-   * @return un object Properties avec les 4 propriétés de la licence (valid, owner, maxDays, maxDate)
+   * @return un object Properties avec les 5 propriétés de la licence (valid, owner, maxDays, maxDate, dqys)
    */
   public static Properties getLicenseProperties(String key, ResourceBundle rb, long startTime) {
     Properties pr = new Properties();
@@ -163,9 +163,10 @@ public class AesUtil {
 
     // détermine la validité de la licence
     boolean valid = license.endsWith("*");
-    int maxDays = (license.endsWith("$") ? MAX_DAYS[0] : MAX_DAYS[1]);
     Date nowDate = new GregorianCalendar().getTime();
     Date startDate = new Date(startTime);
+    int maxDays = (license.endsWith("$") ? MAX_DAYS[0] : MAX_DAYS[1]);
+//    maxDays += (Year.isLeap(getYear(startDate))) ? 1 : 0;
     int days = getDaysBetweenTwoDates(startDate, nowDate);
     pr.put("valid", valid || days <= maxDays);
 
@@ -182,6 +183,7 @@ public class AesUtil {
     if (valid) {
       pr.put("maxdays", "OO");      
     } else {
+//      pr.put("maxdays", "" + days + " / " + maxDays);
       pr.put("maxdays", "" + maxDays);
     }
     
@@ -192,6 +194,13 @@ public class AesUtil {
       maxdate = dateToString(endDate);
     }   
     pr.put("maxdate", maxdate);
+    
+    // jours écoulés
+    if (valid) {
+      pr.put("days", "" + days + " / OO");
+    } else {
+      pr.put("days", "" + days + " / " + maxDays);
+    }
     
     // retourne les propriétés de la licence
     return pr;
