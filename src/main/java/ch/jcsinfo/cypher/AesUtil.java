@@ -181,14 +181,14 @@ public class AesUtil {
     
     // détermine le nombre de jours valides pour la license
     if (valid) {
-      pr.put("maxdays", "OO");      
+      pr.put("maxdays", "-");      
     } else {
 //      pr.put("maxdays", "" + days + " / " + maxDays);
       pr.put("maxdays", "" + maxDays);
     }
     
     // détermine la date de fin de la licence
-    String maxdate = "OO";
+    String maxdate = "-";
     Date endDate = new Date(startTime + maxDays * MILLISECONDS_PER_DAY);
     if (!valid) {
       maxdate = dateToString(endDate);
@@ -197,7 +197,7 @@ public class AesUtil {
     
     // jours écoulés
     if (valid) {
-      pr.put("days", "" + days + " / OO");
+      pr.put("days", "" + days);
     } else {
       pr.put("days", "" + days + " / " + maxDays);
     }
