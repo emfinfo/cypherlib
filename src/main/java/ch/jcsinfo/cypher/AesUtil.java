@@ -180,28 +180,18 @@ public class AesUtil {
     pr.put("owner", owner);
     
     // détermine le nombre de jours valides pour la license
-    if (valid) {
-      pr.put("maxdays", "-");      
-    } else {
-//      pr.put("maxdays", "" + days + " / " + maxDays);
-      pr.put("maxdays", "" + maxDays);
-    }
+    String sMaxDays = (valid) ? "-" : "" + maxDays;
+    pr.put("maxdays", sMaxDays);      
     
     // détermine la date de fin de la licence
-    String maxdate = "-";
-    Date endDate = new Date(startTime + maxDays * MILLISECONDS_PER_DAY);
-    if (!valid) {
-      maxdate = dateToString(endDate);
-    }   
-    pr.put("maxdate", maxdate);
+    Date maxDate = new Date(startTime + maxDays * MILLISECONDS_PER_DAY);
+    String sMaxDate = (valid) ? "-" : dateToString(maxDate);
+    pr.put("maxdate", sMaxDate);
     
-    // jours écoulés
-    if (valid) {
-      pr.put("days", "" + days);
-    } else {
-      pr.put("days", "" + days + " / " + maxDays);
-    }
-    
+    // détermine le nombre de jours écoulés depuis l'installation
+    String sDays = (days + 1) + ((valid) ? "" : " / " + maxDays);
+    pr.put("days", sDays);
+        
     // retourne les propriétés de la licence
     return pr;
   }
