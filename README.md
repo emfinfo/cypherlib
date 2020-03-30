@@ -14,9 +14,9 @@ You can check a specific test with (for example) :
 - mvn test -Dtest=AesUtilTest
 
 Documentation :<br>
-    http://www.jcsinfo.ch/doc/cypherlib<br>
+    https://www.jcsinfo.ch/doc/cypherlib<br>
 
-New in release 1.2.1 (29.3.2020) :
+New in release 1.2.1 (30.3.2020) :
 * new AesUtils.getLicenseProperties() method replace all get... license methods
 
 New in release 1.2.0 (22.1.2020) :
