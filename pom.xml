@@ -5,7 +5,7 @@
   <!-- the basics -->
   <groupId>ch.jcsinfo.libs</groupId>
   <artifactId>cypherlib</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.2</version>
   <packaging>jar</packaging>
   
   <!-- maven project properties -->
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
 
