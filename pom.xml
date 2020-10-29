@@ -73,38 +73,35 @@
       </plugin>
       
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.9.0</version>
-      </plugin>      
-      
-      <plugin>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.1.0</version>
         <configuration>
           <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
         </configuration>
-      </plugin>      
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.9.1</version>
+      </plugin> 
       
     </plugins>
   </build>
 
-  <!-- create javadoc -->
+  <!-- "mvn site" report -->
   <reporting>
     <plugins>
-      
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.1.1</version>
         <configuration>
           <source>1.8</source>
         </configuration>        
       </plugin>
-      
     </plugins>
   </reporting>
 
-  <!-- more project information -->
+  <!-- project information details -->
   <name>CypherLib</name>
   <description>Ecryption and hashing library.</description>
   <licenses>
