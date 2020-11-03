@@ -39,7 +39,7 @@
 
   </dependencies>
 
-  <!-- build settings -->
+  <!-- build plugins -->
   <build>
     <plugins>
             
